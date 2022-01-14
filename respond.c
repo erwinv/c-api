@@ -14,6 +14,7 @@ int allow(struct MHD_Connection *connection, const char *methods) {
     __auto_type response = MHD_create_response_from_buffer(0, NULL, MHD_RESPMEM_PERSISTENT);
     MHD_add_response_header(response, "Allow", methods);
     __auto_type ret = MHD_queue_response(connection, MHD_HTTP_NO_CONTENT, response);
+    MHD_destroy_response(response);
     return ret;
 }
 
