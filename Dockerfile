@@ -12,4 +12,4 @@ RUN mkdir -p /home/app
 WORKDIR /home/app
 COPY --from=build /home/workspace/build/c-api .
 EXPOSE 80
-ENTRYPOINT ./c-api 80
+ENTRYPOINT ./c-api 80 4
