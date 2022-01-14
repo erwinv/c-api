@@ -39,5 +39,5 @@ The executable accepts 2 arguments: (1) TCP port to listen to, and (2) thread po
 ./c-api 8080 4
 
 # docker
-docker run -itP c-api # or make docker-run
+docker run -P c-api # or make docker-run
 ```
