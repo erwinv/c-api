@@ -2,8 +2,8 @@
 
 ## Dependencies
 
-- libmicrohttpd
-- jansson
+- [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)
+- [jansson](https://github.com/akheron/jansson)
 
 ## Build
 
