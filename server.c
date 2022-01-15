@@ -9,7 +9,7 @@ struct MHD_Daemon *start(int port, int threadPoolSize)
                             port,
                             NULL,
                             NULL,
-                            &route,
+                            route,
                             NULL,
                             MHD_OPTION_THREAD_POOL_SIZE, threadPoolSize,
                             MHD_OPTION_END);

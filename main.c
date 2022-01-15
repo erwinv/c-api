@@ -3,12 +3,21 @@
 #include <signal.h>
 #include <unistd.h>
 #include "server.h"
+#include "jsonplaceholder-api.h"
 
 static struct MHD_Daemon *server = NULL;
 
-static void exitHandler(int signalNumber)
+static int setup(int port, int threadPoolSize)
+{
+    init();
+    server = start(port, threadPoolSize);
+    return server != NULL ? 1 : 0;
+}
+
+static void teardown(int signalNumber)
 {
     stop(server);
+    cleanup();
 }
 
 int main(int argc, char *argv[])
@@ -23,12 +32,11 @@ int main(int argc, char *argv[])
     int port = atoi(argv[1]);
     int threadPoolSize = argc == 2 ? 1 : atoi(argv[2]);
 
-    server = start(port, threadPoolSize);
-    if (server == NULL)
+    if (setup(port, threadPoolSize) == 0)
         return 1;
 
-    signal(SIGINT, exitHandler);
-    signal(SIGTERM, exitHandler);
+    signal(SIGINT, teardown);
+    signal(SIGTERM, teardown);
     pause();
 
     return 0;
