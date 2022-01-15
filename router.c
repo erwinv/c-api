@@ -26,6 +26,28 @@ enum MHD_Result route(void *cls,
 
         handler = getRoutes;
     }
+    else if (0 == strcmp(url, "/users"))
+    {
+        if (0 == strcmp(method, "OPTIONS"))
+            return allow(connection, "OPTIONS, GET");
+        if (0 != strcmp(method, "GET"))
+            return methodNotAllowed(connection);
+        if (0 != *upload_data_size)
+            return MHD_NO;
+
+        handler = getUsers;
+    }
+    else if (0 == strcmp(url, "/users/all/posts"))
+    {
+        if (0 == strcmp(method, "OPTIONS"))
+            return allow(connection, "OPTIONS, GET");
+        if (0 != strcmp(method, "GET"))
+            return methodNotAllowed(connection);
+        if (0 != *upload_data_size)
+            return MHD_NO;
+
+        handler = getUsersPosts;
+    }
     else if (0 == strcmp(url, "/users/all/posts/all/comments"))
     {
         if (0 == strcmp(method, "OPTIONS"))
@@ -36,6 +58,17 @@ enum MHD_Result route(void *cls,
             return MHD_NO;
 
         handler = getUsersPostsWithComments;
+    }
+    else if (0 == strcmp(url, "/users/all/albums"))
+    {
+        if (0 == strcmp(method, "OPTIONS"))
+            return allow(connection, "OPTIONS, GET");
+        if (0 != strcmp(method, "GET"))
+            return methodNotAllowed(connection);
+        if (0 != *upload_data_size)
+            return MHD_NO;
+
+        handler = getUsersAlbums;
     }
     else if (0 == strcmp(url, "/users/all/albums/all/photos"))
     {

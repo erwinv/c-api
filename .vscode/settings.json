@@ -1,7 +1,8 @@
 {
   "files.associations": {
     "microhttpd.h": "c",
-    "respond.h": "c"
+    "respond.h": "c",
+    "controller.h": "c"
   },
   "cmake.configureOnOpen": true
 }

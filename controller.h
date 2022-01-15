@@ -10,6 +10,42 @@ enum MHD_Result getRoutes(void *,
                           size_t *,
                           void **);
 
+enum MHD_Result getUsers(void *,
+                         struct MHD_Connection *,
+                         const char *,
+                         const char *,
+                         const char *,
+                         const char *,
+                         size_t *,
+                         void **);
+
+enum MHD_Result getUsersPosts(void *,
+                          struct MHD_Connection *,
+                          const char *,
+                          const char *,
+                          const char *,
+                          const char *,
+                          size_t *,
+                          void **);
+
+enum MHD_Result getUsersAlbums(void *,
+                              struct MHD_Connection *,
+                              const char *,
+                              const char *,
+                              const char *,
+                              const char *,
+                              size_t *,
+                              void **);
+
+enum MHD_Result getUsersTodos(void *,
+                              struct MHD_Connection *,
+                              const char *,
+                              const char *,
+                              const char *,
+                              const char *,
+                              size_t *,
+                              void **);
+
 enum MHD_Result getUsersPostsWithComments(void *,
                                           struct MHD_Connection *,
                                           const char *,
@@ -27,12 +63,3 @@ enum MHD_Result getUsersAlbumsWithPhotos(void *,
                                          const char *,
                                          size_t *,
                                          void **);
-
-enum MHD_Result getUsersTodos(void *,
-                              struct MHD_Connection *,
-                              const char *,
-                              const char *,
-                              const char *,
-                              const char *,
-                              size_t *,
-                              void **);
