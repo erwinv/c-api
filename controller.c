@@ -5,6 +5,49 @@
 #include "respond.h"
 #include "jsonplaceholder-api.h"
 
+static const char proto[] = "http://";
+static char host[60] = "";
+static enum MHD_Result setOrigin(void *cls, enum MHD_ValueKind kind, const char* key, const char* value) {
+    if (strcmp(key, MHD_HTTP_HEADER_HOST) == 0) {
+        strcpy(host, value);
+    }
+
+    if (strlen(host) != 0)
+        return MHD_NO;
+
+    return MHD_YES;
+}
+
+enum MHD_Result getRoutes(void *cls,
+                          struct MHD_Connection *connection,
+                          const char *url,
+                          const char *method,
+                          const char *version,
+                          const char *upload_data,
+                          size_t *upload_data_size,
+                          void **ptr)
+{
+    json_auto_t *routes = json_array();
+
+    if (strlen(host) == 0) {
+        MHD_get_connection_values(connection, MHD_HEADER_KIND, setOrigin, NULL);
+
+        if (strlen(host) == 0) {
+            return noContent(connection);
+        }
+    }
+
+    char route[120];
+    sprintf(route, "%s%s%s", proto, host, "/users/all/posts/all/comments");
+    json_array_append_new(routes, json_string(route));
+    sprintf(route, "%s%s%s", proto, host, "/users/all/albums/all/photos");
+    json_array_append_new(routes, json_string(route));
+    sprintf(route, "%s%s%s", proto, host, "/users/all/todos");
+    json_array_append_new(routes, json_string(route));
+
+    return ok(connection, "application/json", json_dumps(routes, JSON_COMPACT), MHD_RESPMEM_MUST_FREE);
+}
+
 enum MHD_Result getUsersPostsWithComments(void *cls,
                                           struct MHD_Connection *connection,
                                           const char *url,

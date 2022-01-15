@@ -1,6 +1,15 @@
 #pragma once
 #include <microhttpd.h>
 
+enum MHD_Result getRoutes(void *,
+                          struct MHD_Connection *,
+                          const char *,
+                          const char *,
+                          const char *,
+                          const char *,
+                          size_t *,
+                          void **);
+
 enum MHD_Result getUsersPostsWithComments(void *,
                                           struct MHD_Connection *,
                                           const char *,

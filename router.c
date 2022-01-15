@@ -15,7 +15,18 @@ enum MHD_Result route(void *cls,
 {
     MHD_AccessHandlerCallback handler = NULL;
 
-    if (0 == strcmp(url, "/users/all/posts/all/comments"))
+    if (0 == strcmp(url, "/"))
+    {
+        if (0 == strcmp(method, "OPTIONS"))
+            return allow(connection, "OPTIONS, GET");
+        if (0 != strcmp(method, "GET"))
+            return methodNotAllowed(connection);
+        if (0 != *upload_data_size)
+            return MHD_NO;
+
+        handler = getRoutes;
+    }
+    else if (0 == strcmp(url, "/users/all/posts/all/comments"))
     {
         if (0 == strcmp(method, "OPTIONS"))
             return allow(connection, "OPTIONS, GET");
