@@ -4,6 +4,7 @@
 
 - [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)
 - [jansson](https://github.com/akheron/jansson)
+- [libcurl](https://curl.se/libcurl/c/)
 
 ## Build
 
@@ -19,6 +20,7 @@
 #### Headers
 - libmicrohttpd
 - jansson
+- libcurl
 
 ### Build executable
 
