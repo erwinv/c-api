@@ -5,7 +5,7 @@
 #include "respond.h"
 #include "jsonplaceholder-api.h"
 
-static const char proto[] = "http://";
+static const char proto[] = "https://";
 static char host[60] = "";
 static enum MHD_Result setOrigin(void *cls, enum MHD_ValueKind kind, const char *key, const char *value)
 {
